@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../firebase"
+import { Button, FormControl, Grid, TextField } from '@mui/material';
 import { addDoc, collection, doc, updateDoc, onSnapshot } from "firebase/firestore";
 
 const LinksForm = (props) => {
@@ -65,36 +66,43 @@ const LinksForm = (props) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <input 
+        <FormControl>
+            <Grid>
+                <TextField 
                 type="text" 
+                id="standard-helperText"
+                label="Url"
+                helperText="Write Url"
+                variant="standard"
                 placeholder="https//someurl.com" 
                 name="url"
                 value={values.url}
                 onChange={handleInputChange}/>
-            </div>
-            <div>
-                <input 
+            </Grid>
+            <Grid>
+                <TextField 
                 type="text" 
+                id="standard-helperText"
+                label="Name"
+                helperText="Write Name"
+                variant="standard"
                 placeholder="some name" 
                 name="name"
                 value={values.name}
                 onChange={handleInputChange}/>
-            </div>
-            <div>
-                <textarea 
-                name="description" 
-                cols="30" 
-                rows="10" 
+            </Grid>
+            <Grid>
+                <TextField 
+                name="description"
+
+                multiline 
                 placeholder="write description"
                 onChange={handleInputChange}
-                value={values.description}>
-                </textarea>
-            </div>
-            <button>{currentstateId === "" ? "save": "update"}</button>
+                value={values.description}/>
+            </Grid>
+            <Button variant="contained" onClick={handleSubmit}>{currentstateId === "" ? "save": "update"}</Button>
 
-        </form>
+        </FormControl>
     )
 }
 

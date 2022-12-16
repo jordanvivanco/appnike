@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase"
 import LinksForm from "./LinksForm";
+import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
+import { Delete, Edit } from '@mui/icons-material';
 import { collection, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 
 const Links = (props) => {
@@ -29,17 +31,42 @@ const Links = (props) => {
     return (
     <div> 
         <div>
-            <LinksForm {...{currentId, links}}/>
+            <center>
+                <LinksForm {...{currentId, links}}/>
+            </center>
         </div>
+
+        <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 750 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Id</TableCell>
+            <TableCell>Url</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Description</TableCell>
+            <TableCell>Actions</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
         { links.map(link => (
-            <div key={link.id}>
-                <label>{link.id}</label><h1>{link.name}</h1>
-                <h4>{link.url}</h4>
-                <h4>{link.description}</h4>
-                <button onClickCapture={() => onDeleteLink(link.id)}>Delete</button>
-                <button onClickCapture={() => setCurrentId(link.id)}>Edit</button>
-            </div>
+            <TableRow key={link.id}>
+                <TableCell component="th" scope="row">{link.id}</TableCell>
+                <TableCell>{link.name}</TableCell>
+                <TableCell>{link.url}</TableCell>
+                <TableCell>{link.description}</TableCell>
+                <TableCell>
+                    <IconButton onClickCapture={() => onDeleteLink(link.id)} aria-label="delete" size="small">
+                        <Delete fontSize="small" />
+                    </IconButton>
+                    <IconButton onClickCapture={() => setCurrentId(link.id)} aria-label="edit" size="small">
+                        <Edit fontSize="small" />
+                    </IconButton>
+                </TableCell>
+            </TableRow>
         ))}
+        </TableBody>
+        </Table>
+        </TableContainer>
     </div>
     )
 }

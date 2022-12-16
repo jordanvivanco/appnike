@@ -1,10 +1,11 @@
-import React from "react";
-import Links from "./components/Links";
+import React, { useState } from "react";
+import LogAuth from "./components/LogAuth";
 
 function App() {
+  
   return (
       <div>
-        <Links/>
+        <LogAuth />
       </div>
     
   );
