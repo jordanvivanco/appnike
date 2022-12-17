@@ -41,8 +41,8 @@ const Links = (props) => {
         <TableHead>
           <TableRow>
             <TableCell>Id</TableCell>
-            <TableCell>Url</TableCell>
             <TableCell>Name</TableCell>
+            <TableCell>Url</TableCell>
             <TableCell>Description</TableCell>
             <TableCell>Actions</TableCell>
           </TableRow>
